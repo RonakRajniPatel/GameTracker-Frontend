@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Game Vault</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    <body>
+        <div>
+            <!-- This div handles all the user input stuff -->
+            <div class="input text">
+                <!-- Title Name -->
+                <label>
+                    Name
+                    <input type="text" id="titleText" placeholder="Game">
+                </label><br>
+                <!-- Radios for selecting status -->
+                <div class="radio-group">
+                    <label>
+                        Want to Play
+                        <input type="radio" name="status" value="Want to play" checked>
+                    </label><br>
+                    <label>
+                        Are playing
+                        <input type="radio" name="status" value="Are playing">
+                    </label><br>
+                    <label>
+                        Have played
+                        <input type="radio" name="status" value="Have played">
+                    </label><br>
+                    <label>
+                        Have dropped
+                        <input type="radio" name="status" value="Have dropped">
+                    </label><br>
+                </div>
+                <button onclick="saveGame()">Add Game</button>
+            </div>
+            <p id="gameInfo">
+            
+            </p>
+        </div>
+    <script src="script.js"></script>
+    </body>
+</html>
