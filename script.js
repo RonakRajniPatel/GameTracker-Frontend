@@ -7,16 +7,19 @@ class Game {
     }
 
 }
+gameList = [];
 
 // this should retrieve data from the backend server
 function getGame() {
-    console.log("get game activated");
     fetch('http://localhost:8080/games')
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error('Error', error));
+
+    showGames();
 }
 
+// This should add the game and send it to the server
 function saveGame() {
     var userTitle = document.getElementById("titleText").value;
     
@@ -27,21 +30,40 @@ function saveGame() {
     var userHours = document.getElementById("hoursText").value;
 
     var myGame = new Game(userTitle, userStatusText, userHours);
+    gameList.push(JSON.stringify(myGame));
 
-    gameList.push(myGame);
-    console.log(gameList);
-    gameInfoElement.innerHTML = `Title: ${myGame.title} <br> 
-                                 Status: ${myGame.status} <br> 
-                                 Hours: ${myGame.hours}`;
+    // save to server
+    fetch('http://localhost:8080/save/game', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(myGame)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Response from server', data);
+    });
+}
+
+function showGames() {
+    gameList.forEach(jsonGame => {
+        const gameObj = JSON.parse(jsonGame);
+        const gameInfo = `
+        <p>Title: ${gameObj.title}</p>
+        <p>Status: ${gameObj.status}</p>
+        <p>Hours: ${gameObj.hours}</p>
+        <hr>
+      `;
+      gameInfoElement.innerHTML += gameInfo
+    });
 }
 
 var myGame = new Game("Minecraft", "Want to play", "35");
-var gameList = [myGame];
+gameList.push(JSON.stringify(myGame));
 
 // Get the paragraph element by its ID
 var gameInfoElement = document.getElementById("gameInfo");
+gameInfoElement.innerHTML =  "asdf";
 
-// Display the game information in the paragraph
-gameInfoElement.innerHTML = `Title: ${myGame.title} <br> 
-                            Status: ${myGame.status} <br> 
-                            Hours: ${myGame.hours}`;
+showGames();
