@@ -8,6 +8,15 @@ class Game {
 
 }
 
+// this should retrieve data from the backend server
+function getGame() {
+    console.log("get game activated");
+    fetch('http://localhost:8080/games')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error', error));
+}
+
 function saveGame() {
     var userTitle = document.getElementById("titleText").value;
     
@@ -24,10 +33,6 @@ function saveGame() {
     gameInfoElement.innerHTML = `Title: ${myGame.title} <br> 
                                  Status: ${myGame.status} <br> 
                                  Hours: ${myGame.hours}`;
-    fetch('http://localhost:8080')
-        
-        .then(response => response.text())
-        .then(text => console.log(text))
 }
 
 var myGame = new Game("Minecraft", "Want to play", "35");
