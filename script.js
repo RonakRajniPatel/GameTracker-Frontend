@@ -4,20 +4,19 @@ class Game {
         this.title = title;
         this.status = status;
         this.hours = hours;
-    }
+    }static fromJSON(json) {
+    return new Game(json.title, json.status, json.hours);
+  }
 
+  static toGame(json) {
+    return new Game(json.title, json.status, json.hours);
+  }
+
+  toString() {
+    return `Title: ${this.title}, Status: ${this.status}, Hours: ${this.hours}`;
+  }
 }
 gameList = [];
-
-// this should retrieve data from the backend server
-function getGame() {
-    fetch('http://localhost:8080/games')
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error', error));
-
-    showGames();
-}
 
 // This should add the game and send it to the server
 function saveGame() {
@@ -44,11 +43,25 @@ function saveGame() {
     .then(data => {
         console.log('Response from server', data);
     });
+    showGames();
+}
+
+// this should retrieve data from the backend server
+function getGame() {
+    fetch('http://localhost:8080/games')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        gameList = JSON.parse(data);
+    })
+    .catch(error => console.error('Error', error));
+    showGames();
 }
 
 function showGames() {
-    gameList.forEach(jsonGame => {
-        const gameObj = JSON.parse(jsonGame);
+    gameInfoElement.innerHTML = '<p>Show Games</p>';
+    gameList.forEach(game => {
+        const gameObj = game;
         const gameInfo = `
         <p>Title: ${gameObj.title}</p>
         <p>Status: ${gameObj.status}</p>
@@ -59,8 +72,8 @@ function showGames() {
     });
 }
 
-var myGame = new Game("Minecraft", "Want to play", "35");
-gameList.push(JSON.stringify(myGame));
+var myGame = new Game("Placeholder", "Placeholder", "Placeholder");
+gameList.push(myGame);
 
 // Get the paragraph element by its ID
 var gameInfoElement = document.getElementById("gameInfo");
