@@ -4,17 +4,14 @@ class Game {
         this.title = title;
         this.status = status;
         this.hours = hours;
-    }static fromJSON(json) {
-    return new Game(json.title, json.status, json.hours);
-  }
+    }
+    static fromJSON(json) {
+        return new Game(json.title, json.status, json.hours);
+    }
 
-  static toGame(json) {
-    return new Game(json.title, json.status, json.hours);
-  }
-
-  toString() {
-    return `Title: ${this.title}, Status: ${this.status}, Hours: ${this.hours}`;
-  }
+    static toString() {
+        return `Title: ${this.title}, Status: ${this.status}, Hours: ${this.hours}`;
+    }
 }
 gameList = [];
 
