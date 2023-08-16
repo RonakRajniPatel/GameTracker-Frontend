@@ -26,7 +26,7 @@ function saveGame() {
     var userHours = document.getElementById("hoursText").value;
 
     var myGame = new Game(userTitle, userStatusText, userHours);
-    gameList.push(JSON.stringify(myGame));
+    gameList.push(myGame);
 
     // save to server
     fetch('http://localhost:8080/save/game', {
@@ -43,7 +43,7 @@ function saveGame() {
     showGames();
 }
 
-// this should retrieve data from the backend server
+// this should retrieve gameList from the backend server
 function getGame() {
     fetch('http://localhost:8080/games')
     .then(response => response.json())
