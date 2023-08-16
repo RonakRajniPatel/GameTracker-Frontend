@@ -25,6 +25,7 @@ function saveGame() {
 
     var userHours = document.getElementById("hoursText").value;
 
+    // add game to gameList
     var myGame = new Game(userTitle, userStatusText, userHours);
     gameList.push(myGame);
 
@@ -49,7 +50,10 @@ function getGame() {
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        gameList = JSON.parse(data);
+        data.forEach(gameData => {
+            const myGame = new Game(gameData.title, gameData.status, gameData.hours);
+            gameList.push(myGame);
+        })
     })
     .catch(error => console.error('Error', error));
     showGames();
