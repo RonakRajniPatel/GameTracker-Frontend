@@ -74,6 +74,5 @@ gameList.push(myGame);
 
 // Get the paragraph element by its ID
 var gameInfoElement = document.getElementById("gameInfo");
-gameInfoElement.innerHTML =  "asdf";
 
 showGames();
