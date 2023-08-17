@@ -44,19 +44,22 @@ function saveGame() {
     showGames();
 }
 
-// this should retrieve gameList from the backend server
+// this should retrieve gameList from the backend server and overwrite the gameList
 function getGame() {
+
+    gameList = [];
+
     fetch('http://localhost:8080/games')
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         data.forEach(gameData => {
             const myGame = new Game(gameData.title, gameData.status, gameData.hours);
+            myGame.toString();
             gameList.push(myGame);
         })
+        showGames();
     })
     .catch(error => console.error('Error', error));
-    showGames();
 }
 
 function showGames() {
@@ -78,5 +81,4 @@ gameList.push(myGame);
 
 // Get the paragraph element by its ID
 var gameInfoElement = document.getElementById("gameInfo");
-
 showGames();
