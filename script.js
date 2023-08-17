@@ -28,6 +28,7 @@ function saveGame() {
     // add game to gameList
     var myGame = new Game(userTitle, userStatusText, userHours);
     gameList.push(myGame);
+    showGames();
 
     // save to server
     fetch('http://localhost:8080/save/game', {
@@ -38,10 +39,8 @@ function saveGame() {
         body: JSON.stringify(myGame)
     })
     .then(response => response.json())
-    .then(data => {
-        console.log('Response from server', data);
-    });
-    showGames();
+    .then(data => console.log(data))
+    .catch(error => console.log(error));
 }
 
 // this should retrieve gameList from the backend server and overwrite the gameList
