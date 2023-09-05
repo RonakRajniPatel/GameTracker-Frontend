@@ -14,6 +14,20 @@ class Game {
     }
 }
 gameList = [];
+// This handles the login button
+function login() {
+    window.location.href = "http://localhost:8080/login";
+}
+
+// This handles the logout button
+function logout() {
+    window.location.href = "http://localhost:8080/logout";
+}
+
+// This handles the profile button
+function profile() {
+    window.location.href = "http://localhost:8080/profile";
+}
 
 // This should add the game and send it to the server
 function saveGame() {
