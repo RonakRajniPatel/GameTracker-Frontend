@@ -14,20 +14,23 @@ class Game {
     }
 }
 gameList = [];
+
+// Auth0 Buttons
+
 // This handles the login button
-function login() {
-    window.location.href = "http://localhost:8080/login";
-}
+// function login() {
+//     window.location.href = "http://localhost:8080/login";
+// }
 
-// This handles the logout button
-function logout() {
-    window.location.href = "http://localhost:8080/logout";
-}
+// // This handles the logout button
+// function logout() {
+//     window.location.href = "http://localhost:8080/logout";
+// }
 
-// This handles the profile button
-function profile() {
-    window.location.href = "http://localhost:8080/profile";
-}
+// // This handles the profile button
+// function profile() {
+//     window.location.href = "http://localhost:8080/profile";
+// }
 
 // This should add the game and send it to the server
 function saveGame() {
@@ -87,6 +90,15 @@ function showGames() {
       `;
       gameInfoElement.innerHTML += gameInfo
     });
+}
+
+function test() {
+    fetch('http://localhost:8080/test')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+    })
+    .catch(error => console.error('Error', error));
 }
 
 var myGame = new Game("Placeholder", "Placeholder", "Placeholder");
